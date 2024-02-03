@@ -1,0 +1,11 @@
+Setup:
+1. pip install -r requirements.txt
+2. start back end with python backEnd.py
+3. open chrome://extensions in your chrome browser, then click load unpacked, and load the extension folder
+4. open chrome sidepannel and select Instalily Case Study
+
+Config:
+you can change different agent configuration in agent/config.py
+
+Note:
+Agent is set to verbose so you can see what's going on, should set to false in deployment.
