@@ -1,10 +1,10 @@
-from youtube_transcript_api import YouTubeTranscriptApi
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import initialize_agent
 from .tools.Tools import RelevantPartTool, SearchPartTool, RetrieveDocTool
 from . import prompt 
 from . import config
+from langchain.prompts import MessagesPlaceholder
 
 class Agent():
     def __init__(self) -> None:
@@ -23,6 +23,8 @@ class Agent():
             return_messages=True
         )
 
+        chat_history = MessagesPlaceholder(variable_name="chat_history")
+
         self.agent = initialize_agent(
             agent='structured-chat-zero-shot-react-description',
             tools=self.tools,
@@ -30,16 +32,24 @@ class Agent():
             verbose=config.AGENT_VERBOSE,
             max_iterations=config.AGENT_NUM_ITER,
             early_stopping_method='generate',
-            memory=self.conversational_memory
+            memory=self.conversational_memory,
+            agent_kwargs={
+                "prefix": prompt.agentPrefix,
+                "suffix": prompt.agentSufix,
+                "format_instructions": prompt.FORMAT_INSTRUCTIONS,
+                "memory_prompts": [chat_history],
+                "input_variables": ["input", "agent_scratchpad", "chat_history"]
+            }
         )
 
-
+        '''
         new_prompt = self.agent.agent.create_prompt(
             prefix = prompt.agentPrefix,
             suffix = prompt.agentSufix,
-            tools = self.tools
+            tools = self.tools,
         )
         self.agent.agent.llm_chain.prompt = new_prompt
+        '''
     
     def run(self, input: str) -> str:
         return self.agent(input)

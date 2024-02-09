@@ -1,7 +1,10 @@
-AGENT_NUM_ITER = 3  
-MEMORY_K = 5        
+AGENT_NUM_ITER = 2  # how many iteration before must have a answer
+MEMORY_K = 4    # how many iteration kept in memory
 OPEN_AI_TEMPRATURE = 0
 OPENAI_API_KEY = "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"
 AGENT_VERBOSE = True
-OPENAI_MODEL = "gpt-3.5-turbo-0125"
+OPENAI_MODEL = "gpt-4-0125-preview" #3.5-turbo-0125 is much cheaper and faster, but give inconsistent result
 BACK_END_DEBUG = True
+RETRIEVE_MAX_LENGTH = 5000 # max document length my char
+RETRIEVE_MAX_SIZE = 10 # max number of documents retrieved
+DATAPATH = "data"  #path from current directory to datasets

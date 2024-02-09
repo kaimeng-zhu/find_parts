@@ -1,11 +1,15 @@
 Setup:
-1. pip install -r requirements.txt
-2. start back end with python backEnd.py
-3. open chrome://extensions in your chrome browser, then click load unpacked, and load the extension folder
-4. open chrome sidepannel and select Instalily Case Study
+1. go in agent/config.py to put your openai api key "sk-..." 
+    Note: if you can't use gpt4, change OPENAI_MODEL to 3.5-turbo-0125
+2. pip install -r requirements.txt
+3. start back end with python backEnd.py
+4. open chrome://extensions in your chrome browser, then click load unpacked, and load the extension folder
+5. open chrome sidepannel and select Instalily Case Study
 
 Config:
 you can change different agent configuration in agent/config.py
 
 Note:
+Currently use GPT4. I spend a lot of time prompt engineering gpt3.5, but still can't get consistent accuracy.
 Agent is set to verbose so you can see what's going on, should set to false in deployment.
+Agent only relies on partselect.com, I didn't use any outside search engine

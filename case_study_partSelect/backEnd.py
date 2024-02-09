@@ -4,6 +4,7 @@ from agent.agent import Agent
 app = Flask(__name__)
 CORS(app)
 agent = Agent()
+
 @app.route('/process_string', methods=['POST'])
 def process_string():
     data = request.json

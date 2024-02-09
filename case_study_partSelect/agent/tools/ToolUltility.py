@@ -63,6 +63,7 @@ class ToolUltility:
         params = {'searchterm': query}
         response = requests.get(url, params=params)
         ret = ''
+
         if response.status_code == 200:
             try:
                 soup = BeautifulSoup(response.content, 'html.parser')
@@ -79,12 +80,14 @@ class ToolUltility:
                     part_number_span = soup.find('span', itemprop='productID')
                     if part_number_span:
                         ret += "\nPart number: " + part_number_span.get_text().strip()
+
                 labels = ['div','h1']
                 classes = ['pd__description','title-lg','title-main','repair-story__instruction','col-md-6 mt-3']
                 results = soup.find_all(labels,class_=classes)
                 printed_story = False
                 printed_trouble_shooting = False
                 printed_name = False
+
                 for result in results:
                     # Extract and print details from each result
                     if not printed_name and('title-lg' in result['class'] or 'title-main' in result['class']):
@@ -102,11 +105,13 @@ class ToolUltility:
                             ret += "\nRepair Story From Customer:"
                             printed_story = True
                         ret += '\n' + result.get_text(strip=True)
+
                     else:
                         if not printed_trouble_shooting:
                             ret += "\nTrouble Shooting:"
                             printed_trouble_shooting = True
                         ret += '\n'+result.get_text(strip=True)
+                        
                 if get_video:
                     video_id_list = cls.get_page_video_ID(soup)
                     title_and_transcript_list = cls.get_all_title_and_transcript(video_ID_list=video_id_list)

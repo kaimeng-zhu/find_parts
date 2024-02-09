@@ -1,19 +1,19 @@
-
-
 from typing import Optional
 from langchain.tools import BaseTool
 from .ToolUltility import ToolUltility
 from .RetrieveInternal import RetrieveInternal
 from .. import prompt
+from .. import config
 
-DATAPATH = "data"
+DATAPATH = config.DATAPATH #path to the data folder
 
 class SearchPartTool(BaseTool):
     name = "get part info with part number"
     description = prompt.SearchPartTool_desc
 
     def _run(self, part) -> str:
-        return ToolUltility.search_part(query=part,get_video=True)
+        prefix_string = "search part number " + part + " returns:\n"
+        return prefix_string + ToolUltility.search_part(query=part,get_video=True)
     
     def _arun(self, query: str):
         raise NotImplementedError("This tool does not support async")
@@ -26,7 +26,7 @@ class RetrieveDocTool(BaseTool):
     
     
     def _run(self, question: str) -> str:
-        return self.doc_retriever.retrieve_internal(input=question, max_length=3000, max_size = 5)
+        return self.doc_retriever.retrieve_internal(input=question, max_length=config.RETRIEVE_MAX_LENGTH, max_size = config.RETRIEVE_MAX_SIZE)
     
     def _arun(self, question: str) -> str:
         raise NotImplementedError("This tool does not support async")
@@ -49,11 +49,12 @@ class RelevantPartTool(BaseTool):
     description = prompt.RelevantPartTool_desc
 
     def _run(self, machine_model: Optional[str], query: Optional[str]):
+        prefix_string = "find relevant part: " + query + ", for machine " + machine_model + " returns: \n"
         result =  ToolUltility.get_compatible_parts(mode='model',source_part_ID=machine_model, query=query)
         if not result:
-            return "did not found compatible parts"
+            return "It is not Compatible, do not use more tool and responde not compatible"
         else:
-            ret = ''
+            ret = prefix_string + 'Posisble compatible part found: \n'
             for r in result:
                 ret += r + '\n'
             return ret

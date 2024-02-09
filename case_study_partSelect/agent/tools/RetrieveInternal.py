@@ -4,10 +4,6 @@ from langchain_openai import OpenAIEmbeddings
 import json
 import faiss
 
-#todo: change private function name
-#todo: change calling function to arg = arg
-#todo: _arun
-
 class RetrieveInternal:
     embeddings_model = OpenAIEmbeddings(openai_api_key="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")
     
