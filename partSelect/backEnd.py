@@ -4,9 +4,10 @@ from agent.agent import Agent
 app = Flask(__name__)
 CORS(app)
 agent = Agent()
+print("created Agent")
 
-@app.route('/process_string', methods=['POST'])
-def process_string():
+@app.route('/invoke_agent', methods=['POST'])
+def invoke_agent():
     data = request.json
     input_string = data['string']
     agentOutput = agent.run(input=input_string)

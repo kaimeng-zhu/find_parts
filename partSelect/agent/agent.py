@@ -1,14 +1,14 @@
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import initialize_agent
-from .tools.Tools import RelevantPartTool, SearchPartTool, RetrieveDocTool
+from .tools.Tools import ComptaiblePartTool, SearchPartTool, RetrieveDocTool
 from . import prompt 
 from . import config
 from langchain.prompts import MessagesPlaceholder
 
 class Agent():
     def __init__(self) -> None:
-        self.tools = [RelevantPartTool(), SearchPartTool(), RetrieveDocTool()]
+        self.tools = [ComptaiblePartTool(), SearchPartTool(), RetrieveDocTool()]
 
 
         self.llm = ChatOpenAI(
