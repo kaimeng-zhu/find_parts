@@ -1,4 +1,4 @@
-Repaires are expensive but parts are cheap. There is huge market demands on telling customers how to fix things and buy the right parts, without calling a repair person. And this Chrome extension does exactly that.
+Repaires are expensive but parts are cheap. There is huge market demands on telling customers how to fix things and buy the right parts, without calling a repair person. And this Chrome extension does exactly that. Simply asks the chatbot how to fix things and which part to buy.
 
 Setup:
 1. go in agent/config.py to put your openai api key "sk-..." 
