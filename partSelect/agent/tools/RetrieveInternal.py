@@ -3,9 +3,10 @@ import numpy as np
 from langchain_openai import OpenAIEmbeddings
 import json
 import faiss
+from .. import config
 
 class RetrieveInternal:
-    embeddings_model = OpenAIEmbeddings(openai_api_key="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")
+    embeddings_model = OpenAIEmbeddings(openai_api_key=config.OPENAI_API_KEY)
     
     def __init__(self, path) -> None:
         with open(path + "/scrapData.json","r") as file:

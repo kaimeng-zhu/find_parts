@@ -1,7 +1,7 @@
 AGENT_NUM_ITER = 2  # how many iteration before must have a answer
 MEMORY_K = 5    # how many iteration kept in memory
 OPEN_AI_TEMPRATURE = 0
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = ""
 AGENT_VERBOSE = True
 OPENAI_MODEL = "gpt-3.5-turbo-0125" #gpt-3.5-turbo-0125 or gpt-4-0125-preview
 BACK_END_DEBUG = True
